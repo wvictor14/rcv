@@ -6,9 +6,8 @@ email: "victor.2wy@gmail.com"
 twitter: victor2wy
 github: wvictor14
 linkedin: victor2wy
-headcolor: 414141
 date: "`r format(Sys.time(), '%B %Y')`"
-output: function(...) vitae::cv_document(..., template = "../data/npricetemplate.tex", citation_package = "biblatex")
+output: vitae::awesomecv
 editor_options: 
   chunk_output_type: console
 ---
@@ -20,20 +19,45 @@ library(tidyverse)
 library(rorcid)
 library(janitor)
 library(lubridate)
+library(scholar)
 
+# load data
 experience <- read_csv('../data/experience.csv') %>%
   fill(Start, End, What, With, Where, Tag) %>%  
-  mutate(When = paste0(Start, ' -- ', End)) 
+  arrange(desc(Start)) %>% 
+  
+  # format so that year is shown
+  mutate(End = ifelse(End == 'Present', NA, End),
+         When = gsub('NA', 'Present', paste0(year(Start), '--', year(End)))) 
 
+awards <- read_csv('../data/awards.csv') %>%
+  mutate(When = gsub('--NA', '', paste0(year(Start), '--', year(End))))
+
+bibliography <- bibliography_entries('../data/citations.bib')
+
+# for debugging
 options(tinytex.verbose = TRUE)
+
 ```
+
+# Skills
+
+## Dry 
+
+* DNA methylation microarray, RNA expression (sequencing/microarray), Genotyping microarray analysis
+* Supervised machine learning, Regression analysis, Data cleaning, Data visualization
+* R, Bash
+* Tidyverse, Rmarkdown, Git
+
+## Wet
+
+* DNA extraction, Gel electrophoresis, PCR, primer design
+* Genotyping, Sequencing, Microarray prep
 
 # Education
 
 ```{r education}
 edu <- orcid_educations("0000-0002-3394-998X")
-
-
 
 # process/clean education data
 edu <- edu$`0000-0002-3394-998X`$`affiliation-group`$summaries %>%
@@ -57,29 +81,58 @@ edu <- edu$`0000-0002-3394-998X`$`affiliation-group`$summaries %>%
 # display education
 edu %>%
   detailed_entries(
-    what = what,
+    with =  paste0(role_title, ', ', department_name),
+    what = organization_name,
     when = when,
-    with = with,
-    where = where
   )
 ```
 
-# Experience
+# Research
 
 ```{r}
-experience %>% 
-  arrange(desc(Start)) %>% 
+experience %>%
+  filter(Tag == 'Research') %>%
   detailed_entries(
-    what = What,
+    with = What,
     when = When,
-    with = With,
+    what = With,
     where = Where,
     why = Why
   )
 ```
 
-# Skills
+# Teaching
+
+```{r}
+experience %>%
+  filter(Tag == 'Teaching') %>%
+  detailed_entries(
+    with = What,
+    what = Where,
+    when = When,
+    why = Why
+  )
+```
+
+# Awards
+
+```{r}
+awards %>%
+  brief_entries(
+    what = paste0(What, ', ', With),
+    when = When
+  )
+```
 
 # Publications
+
+```{r eval = T}
+# google scholar method
+#get_publications('k_dOrEoAAAAJ') %>% as_tibble
+
+bibliography %>%
+  slice(nrow(.):1)
+```
+
 
 
