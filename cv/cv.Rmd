@@ -6,8 +6,9 @@ email: "victor.2wy@gmail.com"
 twitter: victor2wy
 github: wvictor14
 linkedin: victor2wy
+headcolor: 414141
 date: "`r format(Sys.time(), '%B %Y')`"
-output: vitae::awesomecv
+output: function(...) vitae::cv_document(..., template = "../data/npricetemplate.tex", citation_package = "biblatex")
 editor_options: 
   chunk_output_type: console
 ---
@@ -15,10 +16,73 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(vitae)
+library(tidyverse)
+library(rorcid)
+library(janitor)
+library(lubridate)
+
+experience <- read_csv('../data/experience.csv') %>%
+  fill(Start, End, What, With, Where, Tag) %>%  
+  mutate(When = paste0(Start, ' -- ', End)) 
+
+options(tinytex.verbose = TRUE)
 ```
 
 # Some stuff about me
 
  * I poisoned myself doing research.
- * I was the first woman to win a Nobel prize
- * I was the first person and only woman to win a Nobel prize in two different sciences.
+
+
+# Education
+
+```{r education}
+edu <- orcid_educations("0000-0002-3394-998X")
+
+
+
+# process/clean education data
+edu <- edu$`0000-0002-3394-998X`$`affiliation-group`$summaries %>%
+  map(as_tibble) %>%
+  bind_rows() %>%
+  clean_names %>%
+  rename_all(~gsub('education_summary_', '', .)) %>%
+  select(organization_name:organization_address_country, department_name, 
+         role_title, contains('start'), contains('end'), -organization_disambiguated_organization) %>%
+  mutate(
+         #start = paste(start_date_year_value, start_date_day_value, start_date_month_value, sep = '-'),
+         #end = ifelse(is.na(end_date_year_value), 'Present', 
+         #              paste(end_date_year_value, end_date_day_value, end_date_month_value, sep = '-')),
+    
+    # created detailed entries information
+    what = paste0(role_title, ', ', department_name),
+    when = gsub('NA', 'Present', paste0(start_date_year_value, ' -- ', end_date_year_value)),
+    with = organization_name,
+    where = organization_address_city) 
+
+# display education
+edu %>%
+  detailed_entries(
+    what = what,
+    when = when,
+    with = with,
+    where = where
+  )
+```
+
+# Experience
+
+```{r}
+experience %>% 
+  arrange(desc(Start)) %>% 
+  detailed_entries(
+    what = What,
+    when = When,
+    with = With,
+    where = Where,
+    why = Why
+  )
+```
+
+# Skills
+
+# Publications
