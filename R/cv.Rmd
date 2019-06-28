@@ -5,7 +5,6 @@ address: "Genome Sciences and Technology, UBC. Vancouver, Canada"
 email: "victor.2wy@gmail.com"
 twitter: victor2wy
 github: wvictor14
-linkedin: victor2wy
 date: "`r format(Sys.time(), '%B %Y')`"
 output: vitae::awesomecv
 editor_options: 
