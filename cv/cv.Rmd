@@ -1,7 +1,7 @@
 ---
 name: Victor Yuan
 position: "PhD Candidate"
-address: "BC Children's Hospital Research Institute"
+address: "Genome Sciences and Technology, UBC. Vancouver, Canada"
 email: "victor.2wy@gmail.com"
 twitter: victor2wy
 github: wvictor14
@@ -27,11 +27,6 @@ experience <- read_csv('../data/experience.csv') %>%
 
 options(tinytex.verbose = TRUE)
 ```
-
-# Some stuff about me
-
- * I poisoned myself doing research.
-
 
 # Education
 
@@ -86,3 +81,5 @@ experience %>%
 # Skills
 
 # Publications
+
+
