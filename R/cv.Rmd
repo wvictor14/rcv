@@ -113,7 +113,7 @@ experience %>%
     why = Why
   )
 ```
-
+\newpage
 # Awards
 
 ```{r}
