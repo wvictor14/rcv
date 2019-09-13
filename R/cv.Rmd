@@ -24,11 +24,8 @@ library(scholar)
 # load data
 experience <- read_csv('../data/experience.csv') %>%
   fill(Start, End, What, With, Where, Tag) %>%  
-  arrange(desc(Start)) %>% 
-  
-  # format so that year is shown
-  mutate(End = ifelse(End == 'Present', NA, End),
-         When = gsub('NA', 'Present', paste0(year(Start), '--', year(End)))) 
+  arrange(desc(Start)) 
+
 
 awards <- read_csv('../data/awards.csv') %>%
   mutate(When = gsub('--NA', '', paste0(year(Start), '--', year(End))))
@@ -39,20 +36,6 @@ bibliography <- bibliography_entries('../data/citations.bib')
 options(tinytex.verbose = TRUE)
 
 ```
-
-# Skills
-
-## **Dry**
-
-* DNA methylation microarray, RNA expression (sequencing/microarray), Genotyping microarray analysis
-* Supervised machine learning, Regression analysis, Data cleaning, Data visualization
-* R, Bash
-* `Tidyverse`, `Rmarkdown`, `ggplot2`, `Git`
-
-## **Wet**
-
-* DNA extraction, Gel electrophoresis, PCR, primer design
-* Genotyping, Sequencing, Microarray prep
 
 # Education
 
@@ -90,8 +73,14 @@ edu %>%
 # Research
 
 ```{r}
-experience %>%
+research <- experience %>% 
   filter(Tag == 'Research') %>%
+  
+  # format so that year is shown
+  mutate(End = ifelse(End == 'Present', NA, End),
+         When = gsub('NA', 'Present', paste0(year(Start), '--', year(End)))) 
+
+research %>%
   detailed_entries(
     with = What,
     when = When,
@@ -104,8 +93,16 @@ experience %>%
 # Teaching
 
 ```{r}
-experience %>%
+teaching <- experience %>% 
   filter(Tag == 'Teaching') %>%
+  
+  # format so that year is shown
+  mutate(End = ifelse(End == 'Present', NA, End),
+         When = gsub('NA/NA', 'Present', paste0(year(Start), '/', month(Start),
+                                             '--', 
+                                             year(End), '/', month(End)))) 
+
+teaching %>%
   detailed_entries(
     with = What,
     what = Where,
@@ -113,7 +110,7 @@ experience %>%
     why = Why
   )
 ```
-\newpage
+
 # Awards
 
 ```{r}
@@ -131,7 +128,8 @@ awards %>%
 #get_publications('k_dOrEoAAAAJ') %>% as_tibble
 
 bibliography %>%
-  slice(nrow(.):1)
+  slice(nrow(.):1) %>%
+  mutate(month = NA, urldate = NA)
 ```
 
 

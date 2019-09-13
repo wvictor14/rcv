@@ -1,11 +1,19 @@
 Start,End,What,With,Where,Tag,Why
 2016-01-09,Present,Graduate Student,Robinson Lab,University of British Columbia,Research,Using genomics to investigate environmental and genetic influences on perinatal health
 ,,,,,,Modelling ethnicity using machine learning applied to epigenomic data
-,,,,,,Conducted epigenome- and transcriptome- wide association studies using public and private repositories
+,,,,,,Carrying out epigenome- and transcriptome- wide association studies using public and private repositories
 2016-01-08,2017-01-01,Molecular Biodiversity Lab Assistant,Martone Lab,University of British Columbia,Research,Characterized the impact of weather changes on keystone species lost among the coast of northern BC
 ,,,,,,Processed over 300 algal DNA specimens and applied BLAST for species identification 
 2014-01-01,2016-08-30,Undergraduate Honours Thesis,Whiteway Lab,Concordia University,Research,Developed a CRISPR gene-fusion-insertion protocol in the unicellular fungal species c. albicans
-2018-01-09,Present,Graduate Student Mentor,Robinson Lab,University of British Columbia,Teaching,Mentored 2 undergraduate and 1 graduate students 3-4 month long genomic data anlaysis research projects
+2019-09-01,2019-10-17,"Teaching Assistant, STAT 545: Exploratory Data Analysis",,University of British Columbia,Teaching,Assisted in-class lectures
+,,,,,,Revise lecture content and exercises
+,,,,,,Hosted office hours
+,,,,,,Marked assignments
+2019-08-01,,"Workshop host, Trainee Omics Group",,BC Children's Hospital Research Institute,Teaching,Designed a research graphics (ggplot2) workshop for beginners
+2019-01-01,2019-05-01,Ungraduate Student Supervisor,Yifan Yin,University of British Columbia,Teaching,Supervised this student in his 4th year directed studies project which involved genome-wide identification of DNA methylation -regulated micro RNAs in the human placenta
+2019-09-01,2019-11-01,Graduate Student Mentor,Yen Chan,University of British Columbia,Teaching,Supervised a first year Masters student in Medical Genetics for his 8-week rotation project on placental microRNA analysis in the human placenta
+2018-04-01,2018-08-01,Ungraduate Student Supervisor,Ziqi Liu,BC Children's Hospital Research Institute,Teaching,"Supervised a second-year undergraduate student at the BC Children's Hospital Research Insitute's Summer Scholars program during his 3 month internship in the Robinson lab.
+The project investigatedhow to combine large DNA methylation datasets across several cohorts for analysis in R"
 2017-01-01,2018-01-01,High School Tutor,,,Teaching,"Tutored grades 10-12 in Math, English, Chemisry, Biology and general science"
 2017-01-12,2018-01-08,Stats Support Group Member,,BC Children's Hospital Research Institute,Teaching,Helped develop an on-site network of data analysts 
 2017-01-11,2018-01-08,R Programming Help Session Host,,BC Children's Hospital Research Institute,Teaching,Hosted a bimonthly 1-hour help session for onsite staff and trainees to address data analysis and programming needs
