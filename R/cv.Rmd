@@ -20,17 +20,18 @@ library(rorcid)
 library(janitor)
 library(lubridate)
 library(scholar)
+library(here)
 
 # load data
-experience <- read_csv('../data/experience.csv') %>%
+experience <- read_csv(here::here('data', 'experience.csv')) %>%
   fill(Start, End, What, With, Where, Tag) %>%  
   arrange(desc(Start)) 
 
 
-awards <- read_csv('../data/awards.csv') %>%
+awards <- read_csv(here::here('data', 'awards.csv')) %>%
   mutate(When = gsub('--NA', '', paste0(year(Start), '--', year(End))))
 
-bibliography <- bibliography_entries('../data/citations.bib')
+bibliography <- bibliography_entries(here::here('data', '2021-01-05.bib'))
 
 # for debugging
 options(tinytex.verbose = TRUE)
